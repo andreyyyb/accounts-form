@@ -4,9 +4,16 @@ import { loadAccountsFromStorage, saveAccountsToStorage } from '../utils/account
 
 export const useAccountsStore = defineStore('accounts', {
   state: () => ({
-    accounts: loadAccountsFromStorage() as Account[],
+    accounts: [] as Account[],
   }),
   actions: {
+    loadFromStorage() {
+      try {
+        this.accounts = loadAccountsFromStorage()
+      } catch {
+        this.accounts = []
+      }
+    },
     upsertAccount(account: Account) {
       const idx = this.accounts.findIndex((a) => a.id === account.id)
       if (idx >= 0) this.accounts[idx] = account

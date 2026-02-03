@@ -38,6 +38,10 @@ export function loadAccountsFromStorage(): Account[] {
 
 export function saveAccountsToStorage(accounts: Account[]) {
   if (typeof window === 'undefined') return
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts))
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts))
+  } catch {
+    // localStorage недоступен, переполнен или отключён — игнорируем
+  }
 }
 
