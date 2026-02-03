@@ -61,6 +61,16 @@ src/
 └── main.ts                       # Точка входа приложения
 ```
 
+## Публикация на GitHub Pages
+
+1. В репозитории откройте **Settings** → **Pages**.
+2. В блоке **Build and deployment** в поле **Source** выберите **GitHub Actions**.
+3. После пуша в ветку `main` workflow соберёт проект и задеплоит его. Сайт будет доступен по адресу:  
+   `https://<USERNAME>.github.io/<REPO_NAME>/`
+
+Если репозиторий называется `accounts-form`, ссылка будет:  
+`https://<USERNAME>.github.io/accounts-form/`
+
 ## Особенности реализации
 
 - Валидация происходит при потере фокуса (blur) для текстовых полей и при изменении значения для select
