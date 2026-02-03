@@ -35,9 +35,14 @@ jobs:
           REPO_NAME="${{ github.event.repository.name }}"
           BASE_PATH="/${REPO_NAME,,}/"
           npm run build -- --base "$BASE_PATH"
-      - name: Show built index (debug)
-        run: head -5 ./dist/index.html
-
+      - name: Verify build (no raw /src/main.ts in output)
+        run: |
+          if grep -q '/src/main.ts' ./dist/index.html; then
+            echo "::error::dist/index.html still contains /src/main.ts — build did not transform entry. Check Vite config."
+            exit 1
+          fi
+          echo "Build OK: index.html has bundle script."
+          head -20 ./dist/index.html
       - name: Copy index.html to 404.html (for SPA routing on GitHub Pages)
         run: cp ./dist/index.html ./dist/404.html
 
