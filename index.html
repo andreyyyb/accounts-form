@@ -2,12 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>accounts-form</title>
+    <style>
+      #app:empty::after { content: 'Загрузка…'; padding: 2rem; display: block; text-align: center; color: #666; }
+    </style>
   </head>
   <body>
     <div id="app"></div>
+    <noscript>Для работы приложения включите JavaScript.</noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
