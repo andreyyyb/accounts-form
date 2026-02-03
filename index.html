@@ -12,6 +12,20 @@
   <body>
     <div id="app"></div>
     <noscript>Для работы приложения включите JavaScript.</noscript>
+    <script>
+      // Если через 5 с приложение не загрузилось (например 404 на main.ts) — показываем подсказку
+      setTimeout(function() {
+        var app = document.getElementById('app');
+        if (app && !app.querySelector('*')) {
+          app.innerHTML = '<div style="padding:2rem;max-width:480px;margin:0 auto;text-align:center;font-family:system-ui,sans-serif;">' +
+            '<p style="color:#c00;font-weight:bold;">Приложение не загрузилось.</p>' +
+            '<p>Сейчас GitHub отдаёт исходный код, а не сборку. Исправление:</p>' +
+            '<p><b>Settings</b> → <b>Pages</b> → в блоке <b>Build and deployment</b> в поле <b>Source</b> выберите <b>GitHub Actions</b> (не «Deploy from a branch»).</p>' +
+            '<p>Сохраните, дождитесь зелёного выполнения workflow во вкладке <b>Actions</b>, затем обновите эту страницу (Ctrl+F5).</p>' +
+            '</div>';
+        }
+      }, 5000);
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
