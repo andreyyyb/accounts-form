@@ -71,7 +71,7 @@ src/
 Если репозиторий называется `accounts-form`, ссылка будет:  
 `https://<USERNAME>.github.io/accounts-form/`
 
-**Если в браузере ошибка «Failed to load resource: 404» и в консоли фигурирует `main.ts`** — значит GitHub отдаёт исходный код, а не сборку. Исправление: в **Settings** → **Pages** → **Build and deployment** в поле **Source** должно быть выбрано **«GitHub Actions»**, а не «Deploy from a branch». После смены источника дождитесь зелёного выполнения workflow в **Actions** и обновите страницу (лучше с очисткой кэша: Ctrl+F5).
+**Если в браузере ошибка «Failed to load resource: 404» и в консоли фигурирует `main.ts`** — GitHub отдаёт исходный код, а не сборку. Подробная инструкция: [GITHUB-PAGES-SETUP.md](./GITHUB-PAGES-SETUP.md). Кратко: откройте [Settings → Pages](https://github.com/andreyyyb/accounts-form/settings/pages), в блоке **Build and deployment** в поле **Source** выберите **«GitHub Actions»** (не «Deploy from a branch»), затем во вкладке [Actions](https://github.com/andreyyyb/accounts-form/actions) запустите workflow «Deploy to GitHub Pages» и дождитесь зелёного статуса.
 
 ## Особенности реализации
 
