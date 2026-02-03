@@ -31,19 +31,24 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: |
-          REPO_NAME="${{ github.event.repository.name }}"
-          BASE_PATH="/${REPO_NAME,,}/"
-          npm run build -- --base "$BASE_PATH"
+        run: npm run build -- --base ./
       - name: Verify build (no raw /src/main.ts in output)
         run: |
           if grep -q '/src/main.ts' ./dist/index.html; then
-            echo "::error::dist/index.html still contains /src/main.ts — build did not transform entry. Check Vite config."
+            echo "::error::dist/index.html still contains /src/main.ts — build did not transform entry."
             exit 1
           fi
-          echo "Build OK: index.html has bundle script."
-          head -20 ./dist/index.html
-      - name: Copy index.html to 404.html (for SPA routing on GitHub Pages)
+          echo "Build OK."
+      - name: Inject base tag for GitHub Pages
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          REPO_LOWER=$(echo "$REPO" | tr '[:upper:]' '[:lower:]')
+          # Вставляем <base href="/repo-name/"> после <head>, чтобы ./assets/... разрешались верно
+          sed -i "/<head>/a\\
+    <base href=\"/${REPO_LOWER}/\">" ./dist/index.html
+          echo "Injected base href=/${REPO_LOWER}/"
+          head -15 ./dist/index.html
+      - name: Copy index.html to 404.html
         run: cp ./dist/index.html ./dist/404.html
 
       - name: Setup Pages
