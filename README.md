@@ -1,3 +1,5 @@
+# https://andreyyyb.github.io/accounts-form/
+
 # Форма управления учетными записями
 
 Веб-приложение для управления учетными записями, построенное на Vue.js 3 с использованием Composition API, TypeScript, Pinia и Element Plus.
