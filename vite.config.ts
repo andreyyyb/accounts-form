@@ -3,5 +3,5 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/your-repo-name/',  // имя вашего репозитория
+  base: '/accounts-form/', // имя вашего репозитория
 })
