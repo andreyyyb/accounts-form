@@ -31,7 +31,9 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --base ./
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          npm run build -- --base /${REPO}/
       - name: Verify build (no raw /src/main.ts in output)
         run: |
           if grep -q '/src/main.ts' ./dist/index.html; then
@@ -39,15 +41,6 @@ jobs:
             exit 1
           fi
           echo "Build OK."
-      - name: Inject base tag for GitHub Pages
-        run: |
-          REPO="${{ github.event.repository.name }}"
-          REPO_LOWER=$(echo "$REPO" | tr '[:upper:]' '[:lower:]')
-          # Вставляем <base href="/repo-name/"> после <head>, чтобы ./assets/... разрешались верно
-          sed -i "/<head>/a\\
-    <base href=\"/${REPO_LOWER}/\">" ./dist/index.html
-          echo "Injected base href=/${REPO_LOWER}/"
-          head -15 ./dist/index.html
       - name: Copy index.html to 404.html
         run: cp ./dist/index.html ./dist/404.html
 
